@@ -1,126 +1,166 @@
-<!DOCTYPE html>
-<html lang="vn">
-<head>
-        <meta charset="utf-8" />
-        <title>Huy's blog</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <!--[if IE]>
-            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-</head>
+		<title>Huy's blog</title>
+		<meta name="description" content="">
+		<meta name="author" content="nnh">
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Huy's blog </a></h1>
-                <nav><ul>
-                    <li><a href="/category/misc.html">misc</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/su-dung-jupyter-notebook-co-ban.html">Sử dụng Jupyter notebook cơ bản</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2016-10-18T00:00:00+07:00">
-                Published: T3 18 Tháng mười 2016
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/nnh.html">nnh</a>
-        </address>
-<p>In <a href="/category/misc.html">misc</a>.</p>
-
-</footer><!-- /.post-info --><h1>Jupyter là gì?</h1>
-<p>Là nền tảng tính toán khoa học mã nguồn mở, interactive, hỗ trợ hơn <strong>40 ngôn ngữ lập trình</strong>, trong đó có <strong>python</strong> (jupyter = <strong>ju</strong>lia + <strong>py</strong>thon + <strong>R</strong>). Bài này tập trung vào việc cài đặt, sử dụng jupyter notebook trong lập trình python, cụ thể là giảng dạy python bằng jupyter. Bên cạnh đó, mình thường sử dụng jupyter notebook làm môi trường chạy thử code python ở dạng interactive, trước khi lưu vào script (Biết kết quả từng bước mình làm vẫn thích hơn nhỉ - đó là điểm mạnh của interactive)</p>
-<h1>Jupyter notebook</h1>
-<p>Trước đây là <strong>ipython notebook</strong>, đổi tên thành <strong>jupyter notebook</strong> với mục tiêu hỗ trợ nhiều ngôn ngữ hơn. Là ứng dụng chạy trên nền web cho phép chạy interactive python (tương tự ipython). Hơn thế nữa, nó còn hỗ trợ vẽ các đồ thị, biểu đồ, hỗ trợ viết 1 "notebook" bằng cách sử dụng Markdown</p>
-<h1>Các phím tắt thường dùng trên Jupyter</h1>
-<ul>
-<li>Bấm <strong>New -&gt; Python 3</strong> để tạo 1 Python 3 notebook mới</li>
-<li>1 Notebook bao gồm nhiều <strong>cell</strong>, mỗi cell có thể ở dạng <strong>code</strong>, <strong>markdown</strong> hoặc <strong>raw</strong> (thường dùng <strong>code</strong> và <strong>markdown</strong>). Cell có hỗ trợ syntax highlighting tùy vào trạng thái <strong>code</strong> hoặc <strong>markdown</strong>.</li>
-<li>Khi thấy con trỏ nhấp nháy trong cell, bạn đang ở <strong>edit mode</strong>. Để chuyển sang <strong>command mode</strong>, bấm <strong>esc</strong>, khi đó bạn có thể di chuyển giữa các cell bằng các phím mũi tên, hoặc thao tác với các cell bằng các phím tắt như:</li>
-</ul>
-<div class="highlight"><pre><span></span>enter - chuyển sang edit mode
-a - insert cell above
-b - insert cell below
-c - copy cell
-x - cut cell
-v - paste cell below
-shift + v - paste cell above
-dd - delete cell
-m - chuyển cell sang dạng markdown
-y - chuyển cell sang dạng code
-l - bật/tắt line number
-...
-h - bật help để xem phím tắt
-</pre></div>
+		<link rel="stylesheet" href="/theme/css/foundation.css" />
+		<link rel="stylesheet" href="/theme/css/pygment/monokai.css" />
+		<link rel="stylesheet" href="/theme/css/custom.css" />
 
 
-<ul>
-<li>Một số phím tắt khi ở <strong>edit mode</strong>:</li>
-</ul>
-<div class="highlight"><pre><span></span>tab/shift + tab - indent/dedent vùng được chọn
-shift + tab khi con trỏ ở trong `( )` - hiện help của 1 function, có thể bấm 1, 2, 3, 4 lần để xem chi tiết hơn
-hỗ trợ multi-cursor bằng cách giữ ctrl + bấm chuột vào các vị trí cần đặt cursor
-</pre></div>
+		<script src="/theme/js/modernizr.js"></script>
+
+		<!-- Feeds -->
 
 
-<ul>
-<li>Khi đang ở edit mode, muốn xem help mà ko muốn <code>( )</code> rồi bấm shift+tab thì gõ <code>command?</code>, ví dụ <code>len?</code> rồi shift + enter</li>
-<li>Code cell hỗ trợ auto complete code bằng phím <strong>tab</strong></li>
-<li>Sau khi gõ code trong 1 cell, có thể chạy cell bằng 1 trong các cách:</li>
-</ul>
-<div class="highlight"><pre><span></span>shift+enter: chạy code đó và chọn 1 cell ở dòng dưới (nếu chưa có sẽ tự thêm và chọn cell mới)
-alt+enter: chạy code và thêm 1 cell ở dưới
-ctrl+enter: chạy code
-</pre></div>
+		<!-- mathjax config similar to math.stackexchange -->
+		<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({
+			jax: ["input/TeX", "output/HTML-CSS"],
+			tex2jax: {
+				inlineMath: [ ['$', '$'] ],
+				displayMath: [ ['$$', '$$']],
+				processEscapes: true,
+				skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+			},
+			messageStyle: "none",
+			"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+		});
+		</script>
+		<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	</head>
+	<body>
+		<div class="off-canvas-wrap">
+			<div class="inner-wrap">
+				<!-- mobile top bar to activate nav -->
+				<nav class="tab-bar show-for-small">
+					<section class="left-small">
+						<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+					</section>
+
+					<section class="middle tab-bar-section">
+						<h1 class="title">Huy's&nbsp;blog</h1>
+					</section>
+				</nav>
+
+				<!-- mobile side bar nav -->
+				<aside class="left-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><a href="">Home</a></li>
+						<li><label>Categories</label></li>
+							<li ><a href="/category/misc.html">misc</a></li>
+
+						<li><label>Links</label></li>
+							<li><a href="http://getpelican.com/">Pelican</a></li>
+							<li><a href="http://python.org/">Python.org</a></li>
+							<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
 
 
-<p>*Ngoài việc chạy được python code, 1 code cell có thể chạy được <a href="http://ipython.readthedocs.io/en/stable/interactive/magics.html">magic commands</a>, hoặc chạy shell command bằng dấu <code>!</code>, ví dụ:</p>
-<div class="highlight"><pre><span></span>In [1]: ! cat /etc/passwd
 
-root:x:0:0:root:/root:/bin/zsh
-bin:x:1:1:bin:/bin:/sbin/nologin
-daemon:x:2:2:daemon:/sbin:/sbin/nologin
-adm:x:3:4:adm:/var/adm:/sbin/nologin
-lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
-sync:x:5:0:sync:/sbin:/bin/sync
-shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
-halt:x:7:0:halt:/sbin:/sbin/halt
-</pre></div>
+						<li><label>Social</label></li>
+							<li><a href="https://github.com/huyrua291996">Github</a></li>
+							<li><a href="https://twitter.com/Huyrua291996Huy">Twitter</a></li>
+					</ul>	
+				</aside>
+
+				<!-- top bar nav -->
+				<nav class="top-bar hide-for-small-only" data-topbar>
+					<ul class="title-area">
+						<li class="name">
+							<h1><a href="/">Huy's blog</a></h1>
+						</li>
+					</ul>
+
+					<section class="top-bar-section">
+						<ul class="left">
+								<li ><a href="/category/misc.html">misc</a></li>
+						</ul>
+                        <ul class="right">                                                                                                                                           
+                                                                                                                                             
+                        </ul>  
+					</section>
+				</nav>
+
+				<!-- Main Page Content and Sidebar -->
+				<section class="main-section">
+					<div class="row">
+						<!-- Main Content -->
+						<div class="medium-9 small-12 columns" role="content">
+
+<article>
+	<h3><a href="/so-nguyen-to.html">Số nguyên tố</a></h3>
+	<h6>Written by <a href="/author/nnh.html">nnh</a> in <a href="/category/misc.html">misc</a> on T7 22 Tháng mười 2016.</h6>
+	<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Sieve_of_Eratosthenes_animation.gif" /></p>
+<h1>Số nguyên tố là gì</h1>
+<p>Số <a href="https://vi.wikipedia.org/wiki/S%E1%BB%91_nguy%C3%AAn_t%E1%BB%91">nguyên tố</a> là số tự nhiên lớn hơn 1 và chỉ có nhất <strong>2 ước</strong> là 1 và chính nó.
+Dựa trên định nghĩa này ta có thuật toán tìm số nguyên tố một cách tự nhiên nhất như sau. Với Python:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prime ...</span></pre></div>
+		<p class="continue"><a href="/so-nguyen-to.html">Continue reading &raquo;</a></p>
+</article>
+<hr />
+<article>
+	<h3><a href="/su-dung-jupyter-notebook-co-ban.html">Sử dụng Jupyter notebook cơ bản</a></h3>
+	<h6>Written by <a href="/author/nnh.html">nnh</a> in <a href="/category/misc.html">misc</a> on T3 18 Tháng mười 2016.</h6>
+	<h1>Jupyter là gì?</h1>
+<p>Là nền tảng tính toán khoa học mã nguồn mở, interactive, hỗ trợ hơn <strong>40 ngôn ngữ lập trình</strong>, trong đó có <strong>python</strong> (jupyter = <strong>ju</strong>lia + <strong>py</strong>thon + <strong>R</strong>). Bài này tập trung vào việc cài đặt, sử dụng jupyter notebook trong lập trình python, cụ thể ...</p>
+		<p class="continue"><a href="/su-dung-jupyter-notebook-co-ban.html">Continue reading &raquo;</a></p>
+</article>
+<hr />
 
 
-<p>Cơ bản đủ để dùng giảng dạy python. Tìm hiểu thêm tại: <a href="http://ipython.readthedocs.io/en/stable/">ipython documentation</a> hoặc <a href="http://jupyter.readthedocs.io/en/latest/">jupyter documentation</a></p>
-<p>Happy coding python!</p>                </article>
-            </aside><!-- /#featured -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>blogroll</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                            <li><a href="http://python.org/">Python.org</a></li>
-                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                            <li><a href="#">You can modify those links in your config file</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
+						</div>
+						<!-- End Main Content -->
+						<!-- Sidebar -->
+						<aside class="medium-3 hide-for-small-only columns">
+							<div class="panel">
+								<h5>Links</h5>
+								<ul class="side-nav">
+									<li><a href="http://getpelican.com/">Pelican</a></li>
+									<li><a href="http://python.org/">Python.org</a></li>
+									<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+								</ul>
+							</div>
 
-                            <li><a href="#">You can add links in your config file</a></li>
-                            <li><a href="#">Another social link</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+							<div class="panel">
+								<h5>Tags</h5>
+								<ul class="tag-cloud">
+								</ul>
+							</div>
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+							<div class="panel">
+								<h5>Social</h5>
+								<ul class="side-nav">
+									<li><a href="https://github.com/huyrua291996">Github</a></li>
+									<li><a href="https://twitter.com/Huyrua291996Huy">Twitter</a></li>
+								</ul>
+							</div>
+						</aside>
+						<!-- End Sidebar -->
+					</div>
 
-</body>
+					<!-- Footer -->
+					<footer class="row">
+						<div class="medium-9 small-12">
+							<hr/>
+							<p class="text-center">Powered by <a href="http://getpelican.com">Pelican</a> and <a href="http://foundation.zurb.com/">Zurb Foundation</a>. Theme by <a href="http://hamaluik.com">Kenton Hamaluik</a>.</p>
+						</div>
+					</footer>
+					<!-- End Footer -->
+				</section>
+				<a class="exit-off-canvas"></a>
+			</div><!--off-canvas inner-->
+		</div><!--off-canvas wrap-->
+
+		<script src="/theme/js/jquery.js"></script>
+		<script src="/theme/js/foundation.min.js"></script>
+		<script>
+			$(document).foundation();
+		</script>
+	</body>
 </html>
